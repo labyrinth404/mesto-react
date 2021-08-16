@@ -1,0 +1,24 @@
+.profile {
+    width: 88%;
+    margin: 42px 19px 36px;
+    text-align: center;
+    display: grid;
+    justify-items: center;
+}
+
+@media screen and (min-width: 786px) {
+    .profile {
+        margin: 42px auto 36px;
+        grid-template-columns: 120px 1fr 120px;
+        justify-items: normal;
+    }
+}
+
+@media screen and (min-width: 906px) {
+    .profile {
+        margin: 37px 0 51px;
+        text-align: left;
+        grid-template-columns: 120px repeat(2, auto);
+        width: 880px;
+    }
+}
