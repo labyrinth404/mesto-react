@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import updateButton from '../images/update.svg';
 import avatar from '../images/avatar_kusto.jpg';
 import editButton from '../images/edit-button.svg';
-import addButton from '../images/add-button.svg'
+import addButton from '../images/add-button.svg';
+import { api } from '../utils/Api';
 
-
+ 
 class Main extends React.Component{
     constructor(props) {
         super(props);
+        this.state = {
+            userName: '',
+            userDescription: '',
+            userAvatar: '',
+            cards: [],
+        }
     }
 
     handleEditAvatarClick = () => {
@@ -15,7 +22,7 @@ class Main extends React.Component{
     };
 
     handleEditProfileClick = () => {
-        this.props = true;
+        document.querySelector('.popup_type_confirm').classList.add('popup_opened');
     };
 
     handleAddPlaceClick = () => {
@@ -26,40 +33,61 @@ class Main extends React.Component{
         document.querySelector('.profile__update').addEventListener('click', this.handleEditAvatarClick)
         document.querySelector('.profile__button-edit').addEventListener('click', this.handleEditProfileClick)
         document.querySelector('.profile__button-add').addEventListener('click', this.handleAddPlaceClick)
+        api.getUserInfo()
+        .then((userData) => {
+            this.setState({
+                userName: userData.name,
+                userDescription: userData.about,
+                userAvatar: userData.avatar,
+            })
+        })
+        .catch(error => console.log(error));
+
+        api.getInitialCards()
+            .then((cardsData) => {
+                this.setState({
+                    cards: cardsData
+                });
+            }) 
+            .catch(error => console.log(error));
       }
 
     render(){
+
+
+           
         return (
             <main className="main">
                 <section className="profile">
                     <img src={updateButton} className="profile__update" />
-                    <img src={avatar} className="profile__avatar" alt="Аватарка" />
+                    <div className="profile__avatar"  style={{ backgroundImage: `url(${this.state.userAvatar})` }} />
                     <div className="profile__info">
-                        <h1 className="profile__name"></h1>
+                        <h1 className="profile__name">{this.state.userName}</h1>
                         <button type="button" className="profile__button-edit"> 
                             <img src={editButton} alt="Редактировать" />
                         </button>
-                        <p className="profile__description"></p>
+                        <p className="profile__description">{this.state.userDescription}</p>
                     </div>
                     <button type="button" className="profile__button-add">
                         <img src={addButton} alt="Добавить" />
                     </button>
                 </section>
                 <section className="elements">
-
-                    <template id="element">
+                    {this.state.cards.map(card => ( 
+                    <div id="element">
                         <div className="element">
                             <div className="element__description">
-                                <img src="https://127.0.0.1" className="element__image" alt="Картинка элемента" />
+                                <div className="element__image" style={{ backgroundImage: `url(${card.link})` }}   />
                                 <button type="button" className="element__trash"></button>
-                                <h2 className="element__text">текст</h2>
+                                <h2 className="element__text">{card.name}</h2>
                                 <div className="element__container">
                                     <button type="button" className="element__like"></button>
-                                    <p className="element__count"></p>
+                                    <p className="element__count">{card.likes.length}</p>
                                 </div>
                             </div>
                         </div>
-                    </template>
+                    </div>
+                    ))}
                 </section>
             </main>
         );

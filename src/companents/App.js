@@ -6,30 +6,39 @@ import ImagePopup from './ImagePopup';
 import Main from './Main';
 import Footer from './Footer';
 
-
+ 
 
 
 function App() {
-  let isEditProfilePopupOpen = false;
+
+  const main = new Main();
+  const isEditProfilePopupOpen = main.handleEditProfileClick;
+  const isEditAvatarPopupOpen = main.handleEditAvatarClick;
+  const isAddPlacePopupOpen = main.handleAddPlaceClick;
   let isOpen = false;
   
+  const closeAllPopups = () => {
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
+  };
+  
+
   return (
     <>
       <Header />
 
-      <PopupWithForm  title="Обновить аватар" name={`avatar${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm  onEditAvatar={isEditAvatarPopupOpen} onClose={closeAllPopups} title="Обновить аватар" name={`avatar${isOpen ? ' popup_opened' : ''}`} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="url" placeholder="Ссылка на картинку" className="popup__input" id="mestoUrlAvatar" name="mesto-url-form" />
           <span className="popup-error" id="mestoUrlAvatar-error"></span>
           <button type="submit" className="popup__button-save">Сохранить</button>
         </form>
       }/>
-      <PopupWithForm title="Вы уверены?" name={`confirm${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm title="Вы уверены?"  onClose={closeAllPopups} name={`confirm${isOpen ? ' popup_opened' : ''}`} children={
         <form name="popupDeleteConfirmation" method="post" className="popup__form" novalidate>
           <button type="submit" className="popup__button-save">Да</button>
         </form>
       }/>
-      <PopupWithForm onEditProfile={isEditProfilePopupOpen} title="Редактировать профиль" name={`profile${isEditProfilePopupOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm onEditProfile={isEditProfilePopupOpen} onClose={closeAllPopups} title="Редактировать профиль" name={`profile${isOpen ? ' popup_opened' : ''}`} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="text" value="" className="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40" autocomplete="off" />
           <span className="popup-error" id="popupName-error"></span>
@@ -38,7 +47,7 @@ function App() {
           <button type="submit" className="popup__button-save">Сохранить</button>
         </form>
       }/>
-      <PopupWithForm title="Новое место" name={`add-card${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm onAddPlace={isAddPlacePopupOpen} onClose={closeAllPopups} title="Новое место" name={`add-card${isOpen ? ' popup_opened' : ''}`} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="text" placeholder="Название" className="popup__input" id="mestoName" name="mesto-name-form" minlength="2" maxlength="30" autocomplete="off" />
           <span className="popup-error" id="mestoName-error"></span>
