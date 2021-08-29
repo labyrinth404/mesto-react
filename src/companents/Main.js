@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import updateButton from '../images/update.svg';
-import avatar from '../images/avatar_kusto.jpg';
+import Card from './Card';
 import editButton from '../images/edit-button.svg';
 import addButton from '../images/add-button.svg';
 import { api } from '../utils/Api';
@@ -16,6 +16,10 @@ class Main extends React.Component{
             cards: [],
         }
     }
+
+    handleCardClick = () => {
+
+    };
 
     handleEditAvatarClick = () => {
         document.querySelector('.popup_type_avatar').classList.add('popup_opened');

@@ -1,4 +1,6 @@
-export class Card {
+import { OmitProps } from "antd/lib/transfer/ListBody";
+
+class Card {
     constructor ({ handleCardClick, handleCardLike, handleCardTrash, }, cardData, cardSelector) {
         this._text = cardData.name;
         this._image = cardData.link;
@@ -55,6 +57,10 @@ export class Card {
       
     }
 
+    handleClick(){
+      
+    }
+
     checkLike() {
         return Boolean(this._likes.find(like => like._id === this._myId) !== undefined);
     }
@@ -85,3 +91,5 @@ export class Card {
     }
 }
 
+
+export default Card;

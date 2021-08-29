@@ -17,11 +17,12 @@ function App() {
   const isAddPlacePopupOpen = main.handleAddPlaceClick;
   let isOpen = false;
   
+  const selectedCard = main.handleCardClick;
+  
   const closeAllPopups = () => {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
   };
 
-  let 
   
 
   return (
@@ -59,7 +60,7 @@ function App() {
         </form>
       }/>
 
-      <ImagePopup />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
       <Main />
       
       <Footer />
