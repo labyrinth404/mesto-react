@@ -20,6 +20,8 @@ function App() {
   const closeAllPopups = () => {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
   };
+
+  let 
   
 
   return (
