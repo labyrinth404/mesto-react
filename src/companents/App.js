@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header.js';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
@@ -16,11 +16,16 @@ function App() {
   const isEditAvatarPopupOpen = main.handleEditAvatarClick;
   const isAddPlacePopupOpen = main.handleAddPlaceClick;
   let isOpen = false;
-  
-  const selectedCard = main.handleCardClick;
+
+  const [selectedCard, setSelectedCard ] = useState('');
   
   const closeAllPopups = () => {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
+    setSelectedCard('');
+  };
+
+  const handleCardClick = (e) => {
+    setSelectedCard(e);
   };
 
   
@@ -61,7 +66,7 @@ function App() {
       }/>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-      <Main />
+      <Main onCardClick={handleCardClick}/>
       
       <Footer />
     </>

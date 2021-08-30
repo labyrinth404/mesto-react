@@ -1,7 +1,8 @@
-import { OmitProps } from "antd/lib/transfer/ListBody";
+import React from 'react';
 
-class Card {
-    constructor ({ handleCardClick, handleCardLike, handleCardTrash, }, cardData, cardSelector) {
+class Card extends React.Component {
+    constructor (props, { handleCardClick, handleCardLike, handleCardTrash, }, cardData, cardSelector) {
+        super(props);
         this._text = cardData.name;
         this._image = cardData.link;
         this._likes = cardData.likes;
@@ -58,7 +59,7 @@ class Card {
     }
 
     handleClick(){
-      
+      this.props.onCardClick(this.props.card);
     }
 
     checkLike() {

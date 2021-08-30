@@ -16,10 +16,12 @@ class Main extends React.Component{
             cards: [],
         }
     }
-
-    handleCardClick = () => {
-
-    };
+    handleClick = () => {
+        const card = new Card();
+        this.card = card;
+        this.props.onCardClick(this.card);
+        console.log(this.card)
+    }
 
     handleEditAvatarClick = () => {
         document.querySelector('.popup_type_avatar').classList.add('popup_opened');
@@ -34,6 +36,8 @@ class Main extends React.Component{
     };
 
     componentDidMount() {
+        
+
         document.querySelector('.profile__update').addEventListener('click', this.handleEditAvatarClick)
         document.querySelector('.profile__button-edit').addEventListener('click', this.handleEditProfileClick)
         document.querySelector('.profile__button-add').addEventListener('click', this.handleAddPlaceClick)
