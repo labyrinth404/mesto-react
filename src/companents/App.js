@@ -11,11 +11,11 @@ import Footer from './Footer';
 
 function App() {
 
-  const main = new Main();
-  const isEditProfilePopupOpen = main.handleEditProfileClick;
-  const isEditAvatarPopupOpen = main.handleEditAvatarClick;
-  const isAddPlacePopupOpen = main.handleAddPlaceClick;
-  let isOpen = false;
+  const isOpen = false;
+  const isEditProfilePopupOpen = false;
+  const isAddPlacePopupOpen = false;
+  const isEditAvatarPopupOpen = false;
+
 
   const [selectedCard, setSelectedCard ] = useState('');
   
@@ -28,13 +28,23 @@ function App() {
     setSelectedCard(e);
   };
 
-  
+  const handleEditAvatarClick = () => {
+    document.querySelector('.popup_type_avatar').classList.add('popup_opened');
+  };
+
+  const handleEditProfileClick = () => {
+      document.querySelector('.popup_type_profile').classList.add('popup_opened');
+  };
+
+  const handleAddPlaceClick = () => {
+    document.querySelector('.popup_type_add-card').classList.add('popup_opened');
+  };
 
   return (
     <>
       <Header />
 
-      <PopupWithForm  onEditAvatar={isEditAvatarPopupOpen} onClose={closeAllPopups} title="Обновить аватар" name={`avatar${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm   onClose={closeAllPopups} title="Обновить аватар" isOpen={`${isEditAvatarPopupOpen ? ' popup_opened' : ''}`} name={'avatar'} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="url" placeholder="Ссылка на картинку" className="popup__input" id="mestoUrlAvatar" name="mesto-url-form" />
           <span className="popup-error" id="mestoUrlAvatar-error"></span>
@@ -46,7 +56,7 @@ function App() {
           <button type="submit" className="popup__button-save">Да</button>
         </form>
       }/>
-      <PopupWithForm onEditProfile={isEditProfilePopupOpen} onClose={closeAllPopups} title="Редактировать профиль" name={`profile${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm onClose={closeAllPopups} title="Редактировать профиль"  isOpen={`${isEditProfilePopupOpen ? ' popup_opened' : ''}`} name={'profile'} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="text" value="" className="popup__input" id="popupName" name="popup-name-form" minlength="2" maxlength="40" autocomplete="off" />
           <span className="popup-error" id="popupName-error"></span>
@@ -55,7 +65,7 @@ function App() {
           <button type="submit" className="popup__button-save">Сохранить</button>
         </form>
       }/>
-      <PopupWithForm onAddPlace={isAddPlacePopupOpen} onClose={closeAllPopups} title="Новое место" name={`add-card${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm onClose={closeAllPopups} title="Новое место" isOpen={`${isAddPlacePopupOpen ? ' popup_opened' : ''}`} name={'add-card'} children={
         <form name="popupEditInformation" method="post" className="popup__form" novalidate>
           <input required type="text" placeholder="Название" className="popup__input" id="mestoName" name="mesto-name-form" minlength="2" maxlength="30" autocomplete="off" />
           <span className="popup-error" id="mestoName-error"></span>
@@ -66,7 +76,10 @@ function App() {
       }/>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-      <Main onCardClick={handleCardClick}/>
+      <Main onCardClick={handleCardClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}/>
       
       <Footer />
     </>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import updateButton from '../images/update.svg';
-import Card from './Card';
 import editButton from '../images/edit-button.svg';
 import addButton from '../images/add-button.svg';
 import { api } from '../utils/Api';
-
+import Card from '../companents/Card';
  
 class Main extends React.Component{
     constructor(props) {
@@ -16,31 +15,15 @@ class Main extends React.Component{
             cards: [],
         }
     }
-    handleClick = () => {
-        const card = new Card();
-        this.card = card;
-        this.props.onCardClick(this.card);
-        console.log(this.card)
-    }
 
-    handleEditAvatarClick = () => {
-        document.querySelector('.popup_type_avatar').classList.add('popup_opened');
-    };
 
-    handleEditProfileClick = () => {
-        document.querySelector('.popup_type_confirm').classList.add('popup_opened');
-    };
-
-    handleAddPlaceClick = () => {
-        document.querySelector('.popup_type_add-card').classList.add('popup_opened');
-    };
+ 
 
     componentDidMount() {
-        
 
-        document.querySelector('.profile__update').addEventListener('click', this.handleEditAvatarClick)
-        document.querySelector('.profile__button-edit').addEventListener('click', this.handleEditProfileClick)
-        document.querySelector('.profile__button-add').addEventListener('click', this.handleAddPlaceClick)
+        document.querySelector('.profile__update').addEventListener('click', this.props.onEditAvatar);
+        document.querySelector('.profile__button-edit').addEventListener('click', this.props.onEditProfile);
+        document.querySelector('.profile__button-add').addEventListener('click', this.props.onAddPlace);
         api.getUserInfo()
         .then((userData) => {
             this.setState({
@@ -82,19 +65,9 @@ class Main extends React.Component{
                 </section>
                 <section className="elements">
                     {this.state.cards.map(card => ( 
-                    <div id="element">
-                        <div className="element">
-                            <div className="element__description">
-                                <div className="element__image" style={{ backgroundImage: `url(${card.link})` }}   />
-                                <button type="button" className="element__trash"></button>
-                                <h2 className="element__text">{card.name}</h2>
-                                <div className="element__container">
-                                    <button type="button" className="element__like"></button>
-                                    <p className="element__count">{card.likes.length}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <Card name={card.name}
+                              link={card.link}
+                              likes={card.likes.length} />
                     ))}
                 </section>
             </main>
