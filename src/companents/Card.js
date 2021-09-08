@@ -13,7 +13,7 @@ class Card extends React.Component {
         this._handleCardClick = props.handleCardClick;
         this._handleCardLike = props.handleCardLike;
         this._handleCardTrash = props.handleCardTrash;
-        /*this._element = this._getTemplate();
+        /*this._element = document.querySelector('.element');
         this._imageSelector = this._element.querySelector('.element__image');
         this._textSelector = this._element.querySelector('.element__text');
         this._likeSelector = this._element.querySelector('.element__like');

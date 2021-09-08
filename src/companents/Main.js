@@ -67,7 +67,7 @@ class Main extends React.Component{
                     {this.state.cards.map(card => ( 
                         <Card name={card.name}
                               link={card.link}
-                              likes={card.likes.length} />
+                              likes={card.likes.length}/>
                     ))}
                 </section>
             </main>
