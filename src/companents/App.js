@@ -11,16 +11,19 @@ import Footer from './Footer';
 
 function App() {
 
-  const isOpen = false;
-  const isEditProfilePopupOpen = false;
-  const isAddPlacePopupOpen = false;
-  const isEditAvatarPopupOpen = false;
+  
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen ] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen ] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen ] = useState(false);
 
 
   const [selectedCard, setSelectedCard ] = useState('');
   
   const closeAllPopups = () => {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
+    //TODO: сделать
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
     setSelectedCard('');
   };
 
@@ -29,15 +32,16 @@ function App() {
   };
 
   const handleEditAvatarClick = () => {
-    document.querySelector('.popup_type_avatar').classList.add('popup_opened');
-  };
+      setIsEditAvatarPopupOpen(true);
+  }
+  
 
   const handleEditProfileClick = () => {
-      document.querySelector('.popup_type_profile').classList.add('popup_opened');
+    setIsEditProfilePopupOpen(true);
   };
 
   const handleAddPlaceClick = () => {
-    document.querySelector('.popup_type_add-card').classList.add('popup_opened');
+    setIsAddPlacePopupOpen(true);
   };
 
   return (
@@ -51,7 +55,7 @@ function App() {
           <button type="submit" className="popup__button-save">Сохранить</button>
         </form>
       }/>
-      <PopupWithForm title="Вы уверены?"  onClose={closeAllPopups} name={`confirm${isOpen ? ' popup_opened' : ''}`} children={
+      <PopupWithForm title="Вы уверены?"  onClose={closeAllPopups}  children={
         <form name="popupDeleteConfirmation" method="post" className="popup__form" novalidate>
           <button type="submit" className="popup__button-save">Да</button>
         </form>
@@ -75,8 +79,9 @@ function App() {
         </form>
       }/>
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-      <Main onCardClick={handleCardClick}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={`${selectedCard ? ' popup_opened' : ''}`}/>
+      <Main card={selectedCard}
+            onCardClick={handleCardClick}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}/>
