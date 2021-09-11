@@ -10,7 +10,10 @@ function PopupWithForm(props){
                 <img src={buttonClose} alt="Закрыть" />
             </button>
             <h2 className="popup__title">{props.title}</h2>
-            {props.children}
+            <form method="post" className="popup__form" noValidate>
+              {props.children}
+              {props.name === 'confirm' ? <button type="submit" className="popup__button-save">Да</button> :<button type="submit" className="popup__button-save">Сохранить</button>}
+            </form>
          </div>
       </section>
   );
