@@ -52,7 +52,7 @@ function App() {
 
       }/>
       <PopupWithForm title="Вы уверены?"  onClose={closeAllPopups} name={'confirm'} />
-      <PopupWithForm onClose={closeAllPopups} title="Редактировать профиль" name={'profile'} children={
+      <PopupWithForm onClose={closeAllPopups} title="Редактировать профиль" isOpen={`${isEditProfilePopupOpen ? 'popup_opened' : ''}`} name={'profile'} children={
         <>
           <input required type="text" placeholder="Имя" className="popup__input" id="popupName" name="popup-name-form" minLength="2" maxLength="40" autoComplete="off" />
           <span className="popup-error" id="popupName-error"></span>
