@@ -12,6 +12,7 @@
     background-image: url(../../../images/trash.svg);
     margin: 18px 15px 0 0;
     z-index: 1;
+    visibility: hidden;
 }
 
 .element__trash:hover {
