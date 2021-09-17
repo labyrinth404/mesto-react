@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import updateButton from '../images/update.svg';
 import editButton from '../images/edit-button.svg';
 import addButton from '../images/add-button.svg';
-import { api } from '../utils/Api';
 import Card from '../companents/Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
  
