@@ -9,7 +9,6 @@ function AddPlacePopup(props){
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(nameRef.current)
     props.onAddPlace(nameRef.current.value, linkRef.current.value)
     nameRef.current.value = '';
     linkRef.current.value = '';
@@ -24,8 +23,8 @@ function AddPlacePopup(props){
                    onSubmit={handleSubmit} 
                    children={
       <>
-        <input required t
-               ype="text" 
+        <input required 
+               type="text" 
                placeholder="Название" 
                className="popup__input" 
                id="mestoName" 

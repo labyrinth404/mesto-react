@@ -61,14 +61,16 @@ function App() {
     api.changeLikeCard(card._id, isLiked)
         .then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+        })
+        .catch(error => console.log(error));
   };
 
   const handleCardDelete = (card) => {
     api.deleteCard(card._id)
         .then(() => {
             setCards(cards.filter(item => item._id !== card._id));
-    });
+        })
+        .catch(error => console.log(error));
   };
 
   const handleEditAvatarClick = () => {
@@ -87,25 +89,28 @@ function App() {
     api.patchUserInfo(name, about)
       .then((userData) => {
         setCurrentUser(userData);
+        closeAllPopups();
       })
-      .finally(() => closeAllPopups());
+      .catch(error => console.log(error));
   };
 
   const handleUpdateAvatar = (e) => {
     api.patchUserAvatar(e.avatar.value)
       .then((userData) => {
         setCurrentUser(userData);
+        closeAllPopups();
       })
-      .finally(() => closeAllPopups());
+      .catch(error => console.log(error));
   };
 
   const handleAddPlaceSubmit = (name, link) => {
     
     api.postCard(name, link)
       .then(newCard => {
-        setCards([newCard, ...cards]); 
+        setCards([newCard, ...cards]);
+        closeAllPopups();
       })
-      .finally(() => closeAllPopups());
+      .catch(error => console.log(error));
   };
 
 

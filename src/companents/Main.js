@@ -16,7 +16,7 @@ function Main(props) {
     return (
         <main className="main">
             <section className="profile">
-                <img src={updateButton} className="profile__update" onClick={props.onEditAvatar}/>
+                <img src={updateButton} className="profile__update" onClick={props.onEditAvatar} alt={`Картинка с изображением ${currentUser.name}`}/>
                 <div className="profile__avatar"  style={{ backgroundImage: `url(${currentUser.avatar})` }} />
                 <div className="profile__info">
                     <h1 className="profile__name">{currentUser.name}</h1>

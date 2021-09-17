@@ -31,7 +31,7 @@ function Card(props) {
     );
     
     return (
-        <div id="element">
+        <div id={props.card._id}>
             <div className="element">
                 <div className="element__description">
                     <div className="element__image" style={{ backgroundImage: `url(${link})` }} onClick={handleClick}  />
